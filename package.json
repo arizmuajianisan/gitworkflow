@@ -1,0 +1,43 @@
+{
+  "name": "@arizmuajianisan/gitworkflow",
+  "version": "1.0.0",
+  "author": "arizmuajianisan",
+  "license": "MIT",
+  "description": "Zero-config semantic-release, commitlint & Husky bootstrapper",
+  "bin": {
+    "gitworkflow": "./bin/gitworkflow"
+  },
+  "preferGlobal": true,
+  "files": [
+    "bin/",
+    ".release-it.json",
+    "commitlint.config.js",
+    ".husky/",
+    "README.md"
+  ],
+  "scripts": {
+    "prepare": "husky",
+    "release": "dotenv -e .env -- release-it",
+    "test": "bats test/",
+    "test:watch": "watchexec -w test/ -w bin/ -w scripts/ -- bats test/"
+  },
+  "keywords": [
+    "git",
+    "workflow",
+    "commitlint",
+    "husky",
+    "release-it"
+  ],
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@release-it/conventional-changelog": "^10.0.1",
+    "bats": "^1.12.0",
+    "dotenv-cli": "^10.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.5",
+    "prettier": "^3.6.2",
+    "release-it": "^19.0.4",
+    "watchexec": "^1.10.2"
+  }
+}

@@ -20,7 +20,7 @@
     "release": "dotenv -e .env -- release-it",
     "test": "bats test/",
     "test:watch": "watchexec -w test/ -w bin/ -w scripts/ -- bats test/",
-    "release:beta": "dotenv -e .env -- release-it --preRelease=beta --git.requireBranch="
+    "release:beta": "npm run release -- --preRelease=beta --git.requireBranch="
   },
   "keywords": [
     "git",

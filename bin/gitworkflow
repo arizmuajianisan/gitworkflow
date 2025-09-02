@@ -110,10 +110,12 @@ DEPS=(
   "@release-it/conventional-changelog"
   "dotenv-cli"
 )
-log "Installing dependencies …"
+log "Installing dependencies (this may take a moment) …"
 for dep in "${DEPS[@]}"; do
-  $PKG_MANAGER list --depth=0 --dev "$dep" >/dev/null 2>&1 || \
-    $PKG_MANAGER add -D "$dep"
+  if ! $PKG_MANAGER list --depth=0 --dev "$dep" >/dev/null 2>&1; then
+    $PKG_MANAGER add --no-fund --no-audit --no-progress -D "$dep" >/dev/null 2>&1 || \
+      die "Failed to install $dep"
+  fi
 done
 
 # ------------------------------------------------------------------

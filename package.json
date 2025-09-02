@@ -1,6 +1,6 @@
 {
   "name": "@arizmuajianisan/gitworkflow",
-  "version": "1.0.2-beta.0",
+  "version": "1.0.2-beta.1",
   "author": "arizmuajianisan",
   "license": "MIT",
   "description": "Zero-config semantic-release, commitlint & Husky bootstrapper",

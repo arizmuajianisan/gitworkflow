@@ -18,7 +18,7 @@
   "scripts": {
     "prepare": "husky",
     "release": "dotenv -e .env -- release-it",
-    "publish": "npm publish --access public --tag latest",
+    "publish": "npm publish --access public",
     "test": "bats test/",
     "release:beta": "npm run release -- --preRelease=beta --git.requireBranch=$(git rev-parse --abbrev-ref HEAD)",
     "publish:beta": "npm publish --tag beta --ignore-scripts"

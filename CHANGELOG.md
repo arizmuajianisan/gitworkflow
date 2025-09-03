@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2-beta.4](https://github.com/arizmuajianisan/gitworkflow/compare/v1.0.2-beta.3...v1.0.2-beta.4) (2025-09-03)
+
+### Bug Fixes
+
+- Remove test:watch script and remove public flag on public:beta ([7b0c16d](https://github.com/arizmuajianisan/gitworkflow/commit/7b0c16d1b3e2d900d9a5a5273dea57ec71ebcf5e))
+
 ## [1.0.2-beta.3](https://github.com/arizmuajianisan/gitworkflow/compare/v1.0.2-beta.2...v1.0.2-beta.3) (2025-09-03)
 
 ### Bug Fixes

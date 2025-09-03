@@ -18,10 +18,11 @@
   "scripts": {
     "prepare": "husky",
     "release": "dotenv -e .env -- release-it",
+    "publish": "npm publish --access public --tag latest",
     "test": "bats test/",
     "test:watch": "watchexec -w test/ -w bin/ -w scripts/ -- bats test/",
     "release:beta": "npm run release -- --preRelease=beta --git.requireBranch=$(git rev-parse --abbrev-ref HEAD)",
-    "publish:beta": "npm publish --tag beta"
+    "publish:beta": "npm publish --access public --tag beta"
   },
   "keywords": [
     "git",

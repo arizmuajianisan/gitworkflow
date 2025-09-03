@@ -102,18 +102,20 @@ fi
 # 5.  Dependency installation (idempotent)
 # ------------------------------------------------------------------
 DEPS=(
-  "@commitlint/cli"
-  "@commitlint/config-conventional"
-  "husky"
-  "lint-staged"
-  "release-it"
-  "@release-it/conventional-changelog"
-  "dotenv-cli"
+  "@commitlint/cli@^19.8.1"
+  "@commitlint/config-conventional@^19.8.1"
+  "husky@^9.1.7"
+  "lint-staged@^16.1.5"
+  "release-it@^16.0.0"
+  "@release-it/conventional-changelog@^7.0.0"
+  "dotenv-cli@^10.0.0"
 )
-log "Installing dependencies …"
+log "Installing dependencies (this may take a moment) …"
 for dep in "${DEPS[@]}"; do
-  $PKG_MANAGER list --depth=0 --dev "$dep" >/dev/null 2>&1 || \
-    $PKG_MANAGER add -D "$dep"
+  if ! $PKG_MANAGER list --depth=0 --dev "$dep" >/dev/null 2>&1; then
+    $PKG_MANAGER add --no-fund --no-audit --no-progress -D "$dep" >/dev/null 2>&1 || \
+      die "Failed to install $dep"
+  fi
 done
 
 # ------------------------------------------------------------------
@@ -178,7 +180,20 @@ cat > .release-it.json <<'EOF'
   "plugins": {
     "@release-it/conventional-changelog": {
       "preset": "conventionalcommits",
-      "infile": "CHANGELOG.md"
+      "infile": "CHANGELOG.md",
+      "header": "# Changelog\n\nAll notable changes to this project will be documented in this file.\n\nThe format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),\nand this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).\n",
+      "types": [
+        { "type": "feat", "section": "Features" },
+        { "type": "fix", "section": "Bug Fixes" },
+        { "type": "docs", "section": "Documentation" },
+        { "type": "style", "section": "Styles" },
+        { "type": "refactor", "section": "Code Refactoring" },
+        { "type": "perf", "section": "Performance Improvements" },
+        { "type": "test", "section": "Tests" },
+        { "type": "build", "section": "Build System" },
+        { "type": "ci", "section": "CI Configuration" },
+        { "type": "chore", "section": "Chores" }
+      ]
     }
   }
 }
@@ -203,7 +218,9 @@ fi
 
 # install prettier **after** the prompt
 [[ "$PRETTIER_WANTED" == true ]] && \
-  { log "Installing prettier …"; $PKG_MANAGER list prettier --depth=0 >/dev/null 2>&1 || $PKG_MANAGER add -D prettier; }
+  { log "Installing prettier …"; $PKG_MANAGER list prettier --depth=0 >/dev/null 2>&1 || \
+  $PKG_MANAGER add -D prettier >/dev/null 2>&1 || \
+  die "Failed to install prettier"; }
 
 if [[ "$PRETTIER_WANTED" == false ]]; then
   log "Removing Prettier line from .lintstagedrc.json"

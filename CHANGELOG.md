@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3](https://github.com/arizmuajianisan/gitworkflow/compare/v1.0.2...v1.0.3) (2025-09-25)
+
+### Bug Fixes
+
+- change rule for subject-case to not empty ([7acf332](https://github.com/arizmuajianisan/gitworkflow/commit/7acf3321b29b2f0ac18870e7ab11b7606015a2dc))
+- Remove flag tag latest to handle double publish ([232e829](https://github.com/arizmuajianisan/gitworkflow/commit/232e8299c35a62dcf407958beddc98109e8aa6fa))
+
 ## [1.0.2](https://github.com/arizmuajianisan/gitworkflow/compare/v1.0.2-beta.5...v1.0.2) (2025-09-03)
 
 ## [1.0.2-beta.5](https://github.com/arizmuajianisan/gitworkflow/compare/v1.0.2-beta.4...v1.0.2-beta.5) (2025-09-03)

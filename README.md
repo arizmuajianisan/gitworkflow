@@ -1,5 +1,9 @@
 # gitworkflow
 
+[![npm version](https://badge.fury.io/js/@arizmuajianisan%2Fgitworkflow.svg)](https://badge.fury.io/js/@arizmuajianisan%2Fgitworkflow)
+[![npm downloads](https://img.shields.io/npm/dm/@arizmuajianisan%2Fgitworkflow.svg)](https://npmjs.org/package/@arizmuajianisan%2Fgitworkflow)
+[![GitHub license](https://img.shields.io/github/license/arizmuajianisan/gitworkflow.svg)](https://github.com/arizmuajianisan/gitworkflow/blob/main/LICENSE)
+
 > Created by [arizmuajianisan](https://github.com/arizmuajianisan)
 >
 > A one-command setup for a **professional Git workflow**  
@@ -23,6 +27,8 @@
   - [🤖 CI / CD](#-ci--cd)
   - [📋 Requirements](#-requirements)
   - [🔍 Troubleshooting](#-troubleshooting)
+  - [🤝 Contributing](#-contributing)
+  - [📝 TODO](#-todo)
   - [📄 License](#-license)
 
 ## ✨ What you get
@@ -168,6 +174,54 @@ Edit `.env`:
 ```bash
 GITHUB_TOKEN=ghp_xxxx
 ```
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repo
+2. Clone the fork
+   ```bash
+   git clone https://github.com/arizmuajianisan/gitworkflow.git
+   cd gitworkflow
+   ```
+3. Install dependencies
+   ```bash
+   npm install
+   ```
+4. Create your feature branch
+   ```bash
+   git checkout -b <your-feature-branch>
+   ```
+5. Commit your changes
+   ```bash
+   git add .
+   git commit -m "feat: add dark-mode toggle"
+   ```
+6. Push to your fork
+   ```bash
+   git push origin <your-feature-branch>
+   ```
+7. Open a Pull Request
+
+---
+
+## 📝 TODO
+
+- [ ] Compatibility with Husky v10
+
+  > husky - DEPRECATED. Please remove the following two lines from .husky/pre-push:
+
+  ```bash
+  #!/usr/bin/env sh
+  . "$(dirname -- "$0")/_/husky.sh"
+  ```
+
+  > They WILL FAIL in v10.0.0
+
+- [ ] Add CLI selection for package manager (yarn, pnpm)
+- [ ] Add CLI configuration for rules on commitlint
+- [ ] Add capability to run `bats` tests on non-main branch
 
 ---
 

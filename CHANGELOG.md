@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5-beta.0](https://github.com/arizmuajianisan/gitworkflow/compare/v1.0.4...v1.0.5-beta.0) (2025-12-18)
+
+### Bug Fixes
+
+- **test:** fix testing to cover all 6 test ([4c1a0ad](https://github.com/arizmuajianisan/gitworkflow/commit/4c1a0ad65fad559cce648314faca44852db1f006))
+
 ## [1.0.4](https://github.com/arizmuajianisan/gitworkflow/compare/v1.0.4-beta.0...v1.0.4) (2025-09-25)
 
 ## [1.0.4-beta.0](https://github.com/arizmuajianisan/gitworkflow/compare/v1.0.3...v1.0.4-beta.0) (2025-09-25)

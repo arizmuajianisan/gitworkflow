@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5-beta.2](https://github.com/arizmuajianisan/gitworkflow/compare/v1.0.5-beta.1...v1.0.5-beta.2) (2025-12-18)
+
+### Bug Fixes
+
+- add path resolution logging for Windows debugging ([593a499](https://github.com/arizmuajianisan/gitworkflow/commit/593a49972613e18707622462c868dfbeaa5e3be6))
+
 ## [1.0.5-beta.1](https://github.com/arizmuajianisan/gitworkflow/compare/v1.0.5-beta.0...v1.0.5-beta.1) (2025-12-18)
 
 ### Bug Fixes

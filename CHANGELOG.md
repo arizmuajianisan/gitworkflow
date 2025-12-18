@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5-beta.3](https://github.com/arizmuajianisan/gitworkflow/compare/v1.0.5-beta.2...v1.0.5-beta.3) (2025-12-18)
+
+### Bug Fixes
+
+- copy script to temp directory for Windows bash compatibility ([7edbc6f](https://github.com/arizmuajianisan/gitworkflow/commit/7edbc6f3c1bf75fb0ff7442847558c275277e0e8))
+
 ## [1.0.5-beta.2](https://github.com/arizmuajianisan/gitworkflow/compare/v1.0.5-beta.1...v1.0.5-beta.2) (2025-12-18)
 
 ### Bug Fixes

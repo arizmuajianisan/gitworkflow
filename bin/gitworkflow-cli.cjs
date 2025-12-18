@@ -46,8 +46,13 @@ function main() {
   // We try bash first; if missing, show a helpful message.
   const bashCmd = process.platform === 'win32' ? 'bash.exe' : 'bash';
 
+  // Convert Windows path to Unix-style path for bash on Windows
+  const bashScriptPath = process.platform === 'win32' 
+    ? bashScript.replace(/\\/g, '/').replace(/^([A-Z]):/, (_, drive) => `/${drive.toLowerCase()}`)
+    : bashScript;
+
   try {
-    run(bashCmd, [bashScript, ...argv], { cwd: process.cwd() });
+    run(bashCmd, [bashScriptPath, ...argv], { cwd: process.cwd() });
   } catch (err) {
     const msg = err && err.message ? err.message : String(err);
 

@@ -1,0 +1,73 @@
+diff --git a/package.json b/package.json
+index 020f54e..30d94fd 100644
+--- a/package.json
++++ b/package.json
+@@ -5,11 +5,12 @@
+   "license": "MIT",
+   "description": "Zero-config semantic-release, commitlint & Husky bootstrapper",
+   "bin": {
+-    "gitworkflow": "bin/gitworkflow"
++    "gitworkflow": "bin/gitworkflow-cli.cjs"
+   },
+   "preferGlobal": true,
+   "files": [
+     "bin/",
++    "scripts/",
+     ".release-it.json",
+     "commitlint.config.js",
+     ".husky/",
+diff --git a/test/integration.bats b/test/integration.bats
+index 8d4b9a5..3967d42 100644
+--- a/test/integration.bats
++++ b/test/integration.bats
+@@ -17,7 +17,7 @@ setup_file() {
+ setup() {
+   TMPDIR=$(mktemp -d)
+   cd "$TMPDIR"
+-  SCRIPT="${BATS_TEST_DIRNAME}/../bin/gitworkflow"
++  SCRIPT="${BATS_TEST_DIRNAME}/../bin/gitworkflow-cli.cjs"
+ }
+ 
+ teardown() {
+@@ -34,7 +34,7 @@ teardown() {
+ }
+ 
+ @test "creates package.json" {
+-  run "$SCRIPT" --yes
++  run node "$SCRIPT" --yes
+   [ "$status" -eq 0 ]
+   [ -f package.json ]
+ }
+@@ -42,20 +42,20 @@ teardown() {
+ # These tests only run on main branch
+ @test "installs husky hook" {
+   [ "$IS_MAIN_BRANCH" -eq 1 ] || skip "Skipping main-branch-only test"
+-  run "$SCRIPT" --yes
++  run node "$SCRIPT" --yes
+   [ -f .husky/pre-commit ]
+ }
+ 
+ @test "accepts conventional commit" {
+   [ "$IS_MAIN_BRANCH" -eq 1 ] || skip "Skipping main-branch-only test"
+-  run "$SCRIPT" --yes
++  run node "$SCRIPT" --yes
+   git add .
+   git commit -m "feat: Test the integration"
+ }
+ 
+ @test "rejects non-conventional commit – missing type" {
+   [ "$IS_MAIN_BRANCH" -eq 1 ] || skip "Skipping main-branch-only test"
+-  run "$SCRIPT" --yes
++  run node "$SCRIPT" --yes
+   echo "bad message" > tmp.msg
+   run npx --no-install commitlint --config commitlint.config.js --edit tmp.msg
+   [ "$status" -ne 0 ]
+@@ -64,7 +64,7 @@ teardown() {
+ 
+ @test "rejects non-conventional commit – missing subject" {
+   [ "$IS_MAIN_BRANCH" -eq 1 ] || skip "Skipping main-branch-only test"
+-  run "$SCRIPT" --yes
++  run node "$SCRIPT" --yes
+   echo "feat:" > tmp.msg
+   run npx --no-install commitlint --config commitlint.config.js --edit tmp.msg
+   [ "$status" -ne 0 ]

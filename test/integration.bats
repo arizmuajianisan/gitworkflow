@@ -17,7 +17,7 @@ setup_file() {
 setup() {
   TMPDIR=$(mktemp -d)
   cd "$TMPDIR"
-  SCRIPT="${BATS_TEST_DIRNAME}/../bin/gitworkflow"
+  SCRIPT="${BATS_TEST_DIRNAME}/../bin/gitworkflow-cli.cjs"
 }
 
 teardown() {
@@ -34,7 +34,7 @@ teardown() {
 }
 
 @test "creates package.json" {
-  run "$SCRIPT" --yes
+  run node "$SCRIPT" --yes
   [ "$status" -eq 0 ]
   [ -f package.json ]
 }
@@ -42,20 +42,20 @@ teardown() {
 # These tests only run on main branch
 @test "installs husky hook" {
   [ "$IS_MAIN_BRANCH" -eq 1 ] || skip "Skipping main-branch-only test"
-  run "$SCRIPT" --yes
+  run node "$SCRIPT" --yes
   [ -f .husky/pre-commit ]
 }
 
 @test "accepts conventional commit" {
   [ "$IS_MAIN_BRANCH" -eq 1 ] || skip "Skipping main-branch-only test"
-  run "$SCRIPT" --yes
+  run node "$SCRIPT" --yes
   git add .
   git commit -m "feat: Test the integration"
 }
 
 @test "rejects non-conventional commit – missing type" {
   [ "$IS_MAIN_BRANCH" -eq 1 ] || skip "Skipping main-branch-only test"
-  run "$SCRIPT" --yes
+  run node "$SCRIPT" --yes
   echo "bad message" > tmp.msg
   run npx --no-install commitlint --config commitlint.config.js --edit tmp.msg
   [ "$status" -ne 0 ]
@@ -64,7 +64,7 @@ teardown() {
 
 @test "rejects non-conventional commit – missing subject" {
   [ "$IS_MAIN_BRANCH" -eq 1 ] || skip "Skipping main-branch-only test"
-  run "$SCRIPT" --yes
+  run node "$SCRIPT" --yes
   echo "feat:" > tmp.msg
   run npx --no-install commitlint --config commitlint.config.js --edit tmp.msg
   [ "$status" -ne 0 ]

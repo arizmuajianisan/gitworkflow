@@ -5,6 +5,7 @@
 const { spawnSync } = require('node:child_process');
 const fs = require('node:fs');
 const path = require('node:path');
+const os = require('node:os');
 
 function fileExists(p) {
   try {
@@ -56,8 +57,24 @@ function main() {
     ? bashScript.replace(/\\/g, '/').replace(/^([A-Z]):/, (_, drive) => `/${drive.toLowerCase()}`)
     : bashScript;
 
+  // On Windows, copy the script to a temporary location that bash can access
+  let finalScriptPath = bashScriptPath;
+  if (process.platform === 'win32') {
+    const tempDir = os.tmpdir();
+    const tempScript = path.join(tempDir, 'gitworkflow-temp.sh');
+    
+    try {
+      fs.copyFileSync(bashScript, tempScript);
+      finalScriptPath = tempScript.replace(/\\/g, '/').replace(/^([A-Z]):/, (_, drive) => `/${drive.toLowerCase()}`);
+      console.error('[DEBUG] Copied script to temp location:', finalScriptPath);
+    } catch (err) {
+      console.error('[ERROR] Failed to copy script to temp location:', err.message);
+      process.exit(1);
+    }
+  }
+
   try {
-    run(bashCmd, [bashScriptPath, ...argv], { cwd: process.cwd() });
+    run(bashCmd, [finalScriptPath, ...argv], { cwd: process.cwd() });
   } catch (err) {
     const msg = err && err.message ? err.message : String(err);
 

@@ -5,11 +5,12 @@
   "license": "MIT",
   "description": "Zero-config semantic-release, commitlint & Husky bootstrapper",
   "bin": {
-    "gitworkflow": "bin/gitworkflow"
+    "gitworkflow": "bin/gitworkflow-cli.cjs"
   },
   "preferGlobal": true,
   "files": [
     "bin/",
+    "scripts/",
     ".release-it.json",
     "commitlint.config.js",
     ".husky/",

@@ -33,6 +33,11 @@ function main() {
   const pkgRoot = path.resolve(__dirname, '..');
   const bashScript = path.join(pkgRoot, 'scripts', 'gitworkflow.sh');
 
+  // Debug logging
+  console.error('[DEBUG] pkgRoot:', pkgRoot);
+  console.error('[DEBUG] bashScript:', bashScript);
+  console.error('[DEBUG] File exists:', fileExists(bashScript));
+
   if (!fileExists(bashScript)) {
     console.error('[ERROR] Missing scripts/gitworkflow.sh in installed package.');
     console.error('Reinstall or report this issue to the package maintainer.');

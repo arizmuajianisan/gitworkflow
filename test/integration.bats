@@ -4,19 +4,20 @@
 # Hooked with husky pre-commit
 
 # Check branch once at the start
-IS_MAIN_BRANCH=""
 setup_file() {
-  if [ "$(git rev-parse --abbrev-ref HEAD)" = "main" ]; then
-    IS_MAIN_BRANCH=1
-  else
-    IS_MAIN_BRANCH=0
-    echo "Not on main branch, running only basic tests" >&3
-  fi
+  echo "Tests will run in temporary git repositories" >&3
 }
 
 setup() {
   TMPDIR=$(mktemp -d)
   cd "$TMPDIR"
+  git init
+  git config user.name "Test User"
+  git config user.email "test@example.com"
+  git checkout -b main
+  echo "initial" > README.md
+  git add README.md
+  git commit -m "chore: initial commit"
   SCRIPT="${BATS_TEST_DIRNAME}/../bin/gitworkflow-cli.cjs"
 }
 
@@ -27,10 +28,7 @@ teardown() {
 
 # This test always runs to show branch status
 @test "branch status check" {
-  if [ "$IS_MAIN_BRANCH" -eq 0 ]; then
-    skip "Running in basic test mode (not on main branch)"
-  fi
-  [ true ]
+  [ "$(git rev-parse --abbrev-ref HEAD)" = "main" ]
 }
 
 @test "creates package.json" {
@@ -41,20 +39,20 @@ teardown() {
 
 # These tests only run on main branch
 @test "installs husky hook" {
-  [ "$IS_MAIN_BRANCH" -eq 1 ] || skip "Skipping main-branch-only test"
+  [ "$(git rev-parse --abbrev-ref HEAD)" = "main" ] || skip "Skipping main-branch-only test"
   run node "$SCRIPT" --yes
   [ -f .husky/pre-commit ]
 }
 
 @test "accepts conventional commit" {
-  [ "$IS_MAIN_BRANCH" -eq 1 ] || skip "Skipping main-branch-only test"
+  [ "$(git rev-parse --abbrev-ref HEAD)" = "main" ] || skip "Skipping main-branch-only test"
   run node "$SCRIPT" --yes
   git add .
   git commit -m "feat: Test the integration"
 }
 
 @test "rejects non-conventional commit – missing type" {
-  [ "$IS_MAIN_BRANCH" -eq 1 ] || skip "Skipping main-branch-only test"
+  [ "$(git rev-parse --abbrev-ref HEAD)" = "main" ] || skip "Skipping main-branch-only test"
   run node "$SCRIPT" --yes
   echo "bad message" > tmp.msg
   run npx --no-install commitlint --config commitlint.config.js --edit tmp.msg
@@ -63,7 +61,7 @@ teardown() {
 }
 
 @test "rejects non-conventional commit – missing subject" {
-  [ "$IS_MAIN_BRANCH" -eq 1 ] || skip "Skipping main-branch-only test"
+  [ "$(git rev-parse --abbrev-ref HEAD)" = "main" ] || skip "Skipping main-branch-only test"
   run node "$SCRIPT" --yes
   echo "feat:" > tmp.msg
   run npx --no-install commitlint --config commitlint.config.js --edit tmp.msg

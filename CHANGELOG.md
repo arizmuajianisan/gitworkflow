@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5-beta.4](https://github.com/arizmuajianisan/gitworkflow/compare/v1.0.5-beta.3...v1.0.5-beta.4) (2025-12-19)
+
+### Bug Fixes
+
+- convert from commonjs to es module syntax ([22626e9](https://github.com/arizmuajianisan/gitworkflow/commit/22626e96a3130ffc7f4e56c632a5c9f6dc444617))
+
 ## [1.0.5-beta.3](https://github.com/arizmuajianisan/gitworkflow/compare/v1.0.5-beta.2...v1.0.5-beta.3) (2025-12-18)
 
 ### Bug Fixes
